@@ -1,4 +1,4 @@
-function pval = getCHIpValue(SuccessPoints,TrialsPerEpoch)
+function [pval] = getCHIpValue(SuccessPoints,TrialsPerEpoch)
 FirstPercentSuccess= SuccessPoints(1); % get percent success for the first TrialsPerEpoch many trials
 LastPercentSuccess= SuccessPoints(end); % get percent success for the last TrialsPerEpoch many trials
 n1 = FirstPercentSuccess*TrialsPerEpoch; N1 = TrialsPerEpoch;

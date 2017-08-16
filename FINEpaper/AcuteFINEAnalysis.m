@@ -6,11 +6,11 @@
 % Data directory: X:\limblab\User_folders\Stephanie\Data Analysis\AcuteFINEdata
 
 
-cd('X:\limblab\User_folders\Stephanie\Data Analysis\AcuteFINEdata');
-files = dir('X:\limblab\User_folders\Stephanie\Data Analysis\AcuteFINEdata');
+cd('Z:\limblab\User_folders\Stephanie\Data Analysis\AcuteFINEdata');
+files = dir('Z:\limblab\User_folders\Stephanie\Data Analysis\AcuteFINEdata');
 fileIndex = find(~[files.isdir]);
 
-for ind = 1:6
+for ind = 4
     
     % Load the appropriate file
     fileName = files(fileIndex(ind)).name;
@@ -55,6 +55,8 @@ for ind = 1:6
                 theta = degtorad(270);
             case 'PL'
                 theta = degtorad(330);
+            case 'FCU'
+                theta = degtorad(0);
         end
         allTheta(c) = theta;
     end

@@ -5,6 +5,9 @@ set(gca,'TickDir','out')
  box off
  legend boxoff
 
+ set(findall(gcf, '-property', 'FontSize'), 'FontSize', 10,'Fontname','Arial')
+set(findall(gcf,'type','text'),'fontSize',10,'fontWeight','bold','Fontname','Arial')
+ 
  %set default line widths for the session
 % set(0,'defaultlinelinewidth',1.3)
  

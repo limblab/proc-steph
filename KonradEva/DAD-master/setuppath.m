@@ -1,0 +1,6 @@
+addpath([pwd,'/data/'])
+addpath([pwd,'/code/utils/'])
+addpath([pwd,'/code/main/'])
+addpath([pwd,'/code/main/lsge-cone/'])
+addpath([pwd,'/code/main/icp/'])
+addpath([pwd,'/code/supdecoder/'])

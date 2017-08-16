@@ -5,24 +5,27 @@
 % for that day.
 
 clear
-% % Step 1a: Initialize folders
-% monkeyname = 'Kevin';
-% HybridEMGlist=Kevin_HybridData_EMGQualityInfo();
-% BaseFolder = 'Z:\limblab\User_folders\Stephanie\Data Analysis\Generalizability\Kevin\';
-% SubFolder={'05-15-15','05-19-15s','05-21-15s','05-25-15s','05-26-15s','06-03-15','06-04-15s','06-06-15','06-08-15'};
+%Step 1a: Initialize folders
+monkeyname = 'Kevin';
+HybridEMGlist=Kevin_HybridData_EMGQualityInfo();
+BaseFolder = 'Z:\limblab\User_folders\Stephanie\Data Analysis\Generalizability\Kevin\';
+SubFolder={'05-15-15','05-19-15s','05-21-15s','05-25-15s','05-26-15s','06-03-15','06-04-15s','06-06-15','06-08-15'};
+SubFolder={'05-19-15s','05-21-15s','05-25-15s','05-26-15s','06-04-15s'};
+SubFolder = {'05-19-15s'};
 
-
-monkeyname = 'Jango';
-HybridEMGlist=Jango_HybridData_EMGQualityInfo();
-BaseFolder = 'Z:\limblab\User_folders\Stephanie\Data Analysis\Generalizability\Jango\';
-SubFolder = {'07-23-14','07-24-14s','07-25-14s','08-19-14s','08-20-14s'...
-   '08-21-14s','09-23-14s','09-25-14','09-26-14','10-10-14s','10-11-14s'...
-   '10-12-14s','11-06-14','11-07-14'};
-%SubFolder = {'08-20-14s'};
-SubFolder = {'07-24-14s','07-25-14s','08-19-14s','08-20-14s'...
-   '08-21-14s','09-23-14s','10-10-14s','10-11-14s'...
-   '10-12-14s'};
-
+%monkeyname = 'Jango';
+%HybridEMGlist=Jango_HybridData_EMGQualityInfo();
+%BaseFolder = 'Z:\limblab\User_folders\Stephanie\Data Analysis\Generalizability\Jango\';
+% % % SubFolder = {'07-23-14','07-24-14s','07-25-14s','08-19-14s','08-20-14s'...
+% % %    '08-21-14s','09-23-14s','09-25-14','09-26-14','10-10-14s','10-11-14s'...
+% % %    '10-12-14s','11-06-14','11-07-14'};
+% SubFolder = {'07-24-14s','07-25-14s', '08-19-14s', '08-20-14s',...
+   %'08-21-14s','09-23-14s','10-10-14s','10-11-14s'...
+   %'10-12-14s'};
+  % SubFolder = {'10-12-14s'};
+% SubFolder = {'07-24-14s','07-25-14s', '08-21-14s','09-23-14s'};
+   %8/19, 8/20 each missing a fold (4)
+   
 for z = 1:length(SubFolder)
     % Step 1b:  Load data into workspace | Open folder directory for saving figs 
     cd([BaseFolder SubFolder{z} '\']);
@@ -75,19 +78,31 @@ save = 0;
 
 
 % Step 3: make and save predictions
-%BuildDecodersMakePredictions_Feb252016
-BuildDecodersMakePredictions_June2016
+BuildDecodersMakePredictions_July2016
+%BuildDecodersMakePredictions_NoFolds
 
 % Plot individual EMG predictions
- PlotAllIsometricPredictions(IsoBinned,IsoTest,IonIactTrunk,HonIpred.preddatabin,IonIpred.preddatabin,WonIpred.preddatabin,VAFstruct,save,foldername, [monkeyname '_' datalabel 'IsoPredictions'])
- PlotAllMovementPredictions(WmBinned,WmTest,WonWactTrunk,HonWpred.preddatabin,WonWpred.preddatabin,IonWpred.preddatabin,VAFstruct,save,foldername, [monkeyname '_' datalabel 'WmPredictions'])
- if SpringFile == 1
-     PlotAllSpringPredictions(SprBinned,SprTest,SonSactTrunk,SonSpred.preddatabin,HonSpred.preddatabin,IonSpred.preddatabin,WonSpred.preddatabin, VAFstruct,save,foldername, 'SprPredictions')
-     PlotAllIsometricPredictionsWithH3(IsoBinned,IsoTest,IonIactTrunk,HonIpred.preddatabin,IonIpred.preddatabin,WonIpred.preddatabin,H3onIpred.preddatabin,VAFstruct,save,foldername, [monkeyname '_' datalabel 'IsoPredictionsWithH3'])
-     PlotAllMovementPredictionsWithH3(WmBinned,WmTest,WonWactTrunk,HonWpred.preddatabin,WonWpred.preddatabin,IonWpred.preddatabin,H3onWpred.preddatabin,VAFstruct,save,foldername, [monkeyname '_' datalabel 'WmPredictionsWithH3'])
- end
+% The VAFs reported are now the VAF for that actual segment
+% for emgInd=1:length(WmBinned.emgdatabin(1,:))
+%     PlotAllIsometricPredictions(IsoBinned,IsoTest,IonIactTrunk,HonIpred.preddatabin,IonIpred.preddatabin,WonIpred.preddatabin,VAFstruct,emgInd,save,foldername, [monkeyname '_' datalabel 'IsoPredictions'])
+%     PlotAllMovementPredictions(WmBinned,WmTest,WonWactTrunk,HonWpred.preddatabin,WonWpred.preddatabin,IonWpred.preddatabin,VAFstruct,emgInd,save,foldername, [monkeyname '_' datalabel 'WmPredictions'])
+%     if SpringFile == 1
+%         PlotAllSpringPredictions(SprBinned,SprTest,SonSactTrunk,SonSpred.preddatabin,HonSpred.preddatabin,IonSpred.preddatabin,WonSpred.preddatabin, VAFstruct,emgInd,save,foldername, 'SprPredictions')
+%         PlotAllIsometricPredictionsWithH3(IsoBinned,IsoTest,IonIactTrunk,HonIpred.preddatabin,IonIpred.preddatabin,WonIpred.preddatabin,H3onIpred.preddatabin,VAFstruct,save,foldername, [monkeyname '_' datalabel 'IsoPredictionsWithH3'])
+%         PlotAllMovementPredictionsWithH3(WmBinned,WmTest,WonWactTrunk,HonWpred.preddatabin,WonWpred.preddatabin,IonWpred.preddatabin,H3onWpred.preddatabin,VAFstruct,emgInd,save,foldername, [monkeyname '_' datalabel 'WmPredictionsWithH3'])
+%     end
+% end
 
 % Make mega VAF struct
+if z == 1
+    MegaVAFstruct = VAFstruct;
+    else
+    MegaVAFstruct = [MegaVAFstruct VAFstruct];
+end
+
+
+% Make mega VAF struct - commented out when i tried the noFolds code, can
+% uncomment when I bring the folds back
 if z == 1
     MegaVAFstruct = VAFstruct;
     MegaIndivVAFstruct = IndivVAFstruct;
@@ -99,6 +114,8 @@ if z == 1
         AllDaysIonS=IonS_vaf;
         AllDaysWonS=WonS_vaf;
         AllDaysHonS=HonS_vaf;
+        AllDaysSonI=SonI_vaf;
+        AllDaysSonW=SonW_vaf;
         AllDaysH3onS=H3onS_vaf; AllDaysH3onW=H3onW_vaf; AllDaysH3onI=H3onI_vaf;
     end
 else
@@ -112,6 +129,7 @@ else
     AllDaysIonS=cat(1,AllDaysIonS,IonS_vaf); AllDaysHonS=cat(1,AllDaysHonS,HonS_vaf);
     AllDaysH3onI=cat(1,AllDaysH3onI,H3onI_vaf); AllDaysH3onW=cat(1,AllDaysH3onW,H3onW_vaf);   
     AllDaysH3onS=cat(1,AllDaysH3onS,H3onS_vaf);    
+    AllDaysSonI=cat(1,AllDaysSonI,SonI_vaf); AllDaysSonW=cat(1,AllDaysSonW,SonW_vaf);
     end
 end
 
@@ -124,7 +142,7 @@ clearvars -except monkeyname BaseFolder SubFolder meanHonI_PC_mse meanIonI_PC_ms
     stdHonI_PC_mse stdIonI_PC_mse stdWonI_PC_mse stdHonW_PC_mse stdWonW_PC_mse stdIonW_PC_mse meanHonS_PC_mse meanIonS_PC_mse meanWonS_PC_mse meanSonS_PC_mse ...
         stdHonS_PC_mse stdIonS_PC_mse stdWonS_PC_mse stdSonS_PC_mse z MegaVAFstruct MegaIndivVAFstruct  HybridEMGlist ...
         AllDaysIonI AllDaysWonW AllDaysWonI AllDaysIonW AllDaysHonI AllDaysHonW AllDaysSonS AllDaysIonS AllDaysWonS AllDaysHonS ...
-        AllDaysH3onS AllDaysH3onI AllDaysH3onW AllIsoFits AllWmFits AllSprFits
+        AllDaysH3onS AllDaysH3onI AllDaysH3onW AllDaysSonI AllDaysSonW AllIsoFits AllWmFits AllSprFits
 
 
 
@@ -138,11 +156,9 @@ for a=1:length(SubFolder)
     %PlotVAFAcrossDays_wSpring(a,1004,MegaVAFstruct(a).SonS_vaf_mean, MegaVAFstruct(a).SonS_vaf_ste, MegaVAFstruct(a).HonS_vaf_mean,MegaVAFstruct(a).HonS_vaf_ste, MegaVAFstruct(a).WonS_vaf_mean,MegaVAFstruct(a).WonS_vaf_ste, MegaVAFstruct(a).IonS_vaf_mean,MegaVAFstruct(a).IonS_vaf_ste,save,foldername, [monkeyname ' | ', 'Spring VAFs Across Days'])   
 %PlotVAFAcrossDays(a,1010,MegaVAFstruct(a).H3onI_vaf_mean, MegaVAFstruct(a).H3onI_vaf_ste, MegaVAFstruct(a).H3onW_vaf_mean, MegaVAFstruct(a).H3onW_vaf_ste, MegaVAFstruct(a).H3onS_vaf_mean, MegaVAFstruct(a).H3onS_vaf_ste, save,foldername, [monkeyname ' | ', ' H3 VAFs Across Days'])
 
-   PlotVAFAcrossDaysWithH3(a,1001,MegaVAFstruct(a).WonW_vaf_mean, MegaVAFstruct(a).WonW_vaf_ste, MegaVAFstruct(a).HonW_vaf_mean, MegaVAFstruct(a).HonW_vaf_ste,MegaVAFstruct(a).H3onW_vaf_mean, MegaVAFstruct(a).H3onW_vaf_ste, MegaVAFstruct(a).IonW_vaf_mean, MegaVAFstruct(a).IonW_vaf_ste, save,foldername, [monkeyname ' | ', ' Wm VAFs Across Days'])
-
+PlotVAFAcrossDaysWithH3(a,1001,MegaVAFstruct(a).WonW_vaf_mean, MegaVAFstruct(a).WonW_vaf_ste, MegaVAFstruct(a).HonW_vaf_mean, MegaVAFstruct(a).HonW_vaf_ste,MegaVAFstruct(a).H3onW_vaf_mean, MegaVAFstruct(a).H3onW_vaf_ste, MegaVAFstruct(a).IonW_vaf_mean, MegaVAFstruct(a).IonW_vaf_ste, save,foldername, [monkeyname ' | ', ' Wm VAFs Across Days'])
 PlotVAFAcrossDaysWithH3(a,1000,MegaVAFstruct(a).IonI_vaf_mean, MegaVAFstruct(a).IonI_vaf_ste, MegaVAFstruct(a).HonI_vaf_mean, MegaVAFstruct(a).HonI_vaf_ste, MegaVAFstruct(a).H3onI_vaf_mean, MegaVAFstruct(a).H3onI_vaf_ste, MegaVAFstruct(a).WonI_vaf_mean, MegaVAFstruct(a).WonI_vaf_ste, save,foldername, [monkeyname ' | ', ' Iso VAFs Across Days'])
-   
-  PlotVAFAcrossDays_wSpringWithH3(a,1004,MegaVAFstruct(a).SonS_vaf_mean, MegaVAFstruct(a).SonS_vaf_ste, MegaVAFstruct(a).HonS_vaf_mean,MegaVAFstruct(a).HonS_vaf_ste, MegaVAFstruct(a).H3onS_vaf_mean,MegaVAFstruct(a).H3onS_vaf_ste,MegaVAFstruct(a).WonS_vaf_mean,MegaVAFstruct(a).WonS_vaf_ste, MegaVAFstruct(a).IonS_vaf_mean,MegaVAFstruct(a).IonS_vaf_ste,save,foldername, [monkeyname ' | ', 'Spring VAFs Across Days'])   
+PlotVAFAcrossDays_wSpringWithH3(a,1004,MegaVAFstruct(a).SonS_vaf_mean, MegaVAFstruct(a).SonS_vaf_ste, MegaVAFstruct(a).HonS_vaf_mean,MegaVAFstruct(a).HonS_vaf_ste, MegaVAFstruct(a).H3onS_vaf_mean,MegaVAFstruct(a).H3onS_vaf_ste,MegaVAFstruct(a).WonS_vaf_mean,MegaVAFstruct(a).WonS_vaf_ste, MegaVAFstruct(a).IonS_vaf_mean,MegaVAFstruct(a).IonS_vaf_ste,save,foldername, [monkeyname ' | ', 'Spring VAFs Across Days'])   
 
 %     PlotVAFAcrossDays(a,1005,mean([MegaIndivVAFstruct(a).IonI_vaf_mean]), (std([MegaIndivVAFstruct(a).IonI_vaf_mean]))/(sqrt(length([MegaIndivVAFstruct(a).IonI_vaf_mean]))),...
 %         mean([MegaIndivVAFstruct(a).HonI_vaf_mean]), (std([MegaIndivVAFstruct(a).HonI_vaf_mean]))/(sqrt(length([MegaIndivVAFstruct(a).HonI_vaf_mean]))),...

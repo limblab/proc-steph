@@ -26,7 +26,7 @@ for b=3:6
 plot(xvals,cell2mat(JangoWFMUblock20160411155418stimout(start:stop,b)),'LineWidth',LineWidth);
 end
 xlim([0 (stop-start)*.05])
-legend(bmi_fes_stim_params.muscles(1:4));
+% legend(bmi_fes_stim_params.muscles(1:4)); check this
 legend boxoff; MillerFigure
 
 load('Z:\data\Jango_12a1\CerebusData\Samplefes\20160411\Processed\Jango_WF_MUblock__20160411_155418_Binned.mat')

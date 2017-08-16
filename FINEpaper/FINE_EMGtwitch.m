@@ -1,6 +1,6 @@
 % Make FINE_EMGFigure
 
-load('C:\Users\LimbLabSteph\Dropbox\FINEpaper\PAM-Ch2-Median-FF022602-Cnum16-Beg-Recruitment Curve-trial5.mat')
+load('C:\Stephanie\Data\FINEdata\TwitchData\PAM-Ch2-Median-FF022602-Cnum16-Beg-Recruitment Curve-trial5.mat')
 handles.EMGnames
 % Load twitches for FDP2
 figure; plot(rawtwitch(:,14))

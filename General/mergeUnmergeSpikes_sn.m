@@ -8,7 +8,7 @@
 % what you're doing.)
 
 % Merge files
-file_path = 'Z:\Jango_12a1\CerebusData\Generalizability\WithHandle\08-21-14\';
+file_path = 'Z:\data\Jango_12a1\CerebusData\LearnAdapt\KO-08-07-15\';
 file_prefix = 'Jango';
 
 % Run processSpikesForSorting for the first time to combine spike data from
@@ -18,18 +18,18 @@ mergingStatus = processSpikesForSorting_sn(file_path,file_prefix,1);
 %-------------------------------------------------------------------------------------
 %%
 %-------------------------------------------------------------------------
-file_path = 'Z:\Jango_12a1\CerebusData\Generalizability\WithHandle\08-21-14\';
+file_path = 'Z:\data\Jango_12a1\CerebusData\PICexperiment\06-15-14 Cypro\';
 file_prefix = 'Jango';
 
 mergingStatus = 'merged spikes';
 mergingStatus = processSpikesForSorting_sn(file_path,file_prefix,0);
  
      
-file_prefix1 = 'Jango_20140821_IsoHandleHoriz_Utah10ImpEMGs_SN_001';
-file_prefix2 = 'Jango_20140821_WmHandleHoriz_Utah10ImpEMGs_SN_002';
-file_prefix3 = 'Jango_20140821_SprHandleHoriz_Utah10ImpEMGs_SN_003';
-%file_prefix4 = 'Jango_20141004_IsoBoxCO_UtahEMGs_SN_004';
-%file_prefix5 = 'Jango_IsoBoxCO_UtahEMGs_051515_SN_005';
+file_prefix1 = 'Jango_IsoBoxBaseline_Utah12EMGs_06152014_SN_KG_001';
+file_prefix2 = 'Jango_IsoBoxBaseline_Utah12EMGs_06152014_SN_KG_002';
+file_prefix3 = 'Jango_IsoBoxCypro_Utah12EMGs_06152014_SN_KG_003';
+file_prefix4 = 'Jango_IsoBoxCypro_Utah12EMGs_06152014_SN_KG_004';
+
  
  if strcmp(mergingStatus,'processed')
      % If everything went well, create bdfs for your files (you might
@@ -38,15 +38,15 @@ file_prefix3 = 'Jango_20140821_SprHandleHoriz_Utah10ImpEMGs_SN_003';
      bdf1 = get_nev_mat_data([file_path file_prefix1],'verbose','rothandle',0,1,'ignore_jumps');
      bdf2 = get_nev_mat_data([file_path file_prefix2],'verbose','rothandle',0,1,'ignore_jumps');
     bdf3 = get_nev_mat_data([file_path file_prefix3],'verbose','rothandle',0,1,'ignore_jumps');
-  % bdf4 = get_nev_mat_data([file_path file_prefix4],'verbose','rothandle',0,1,'ignore_jumps');
- %  bdf5 = get_nev_mat_data([file_path file_prefix5],'verbose','rothandle',0,1,'ignore_jumps');
+   bdf4 = get_nev_mat_data([file_path file_prefix4],'verbose','rothandle',0,1,'ignore_jumps');
+  bdf5 = get_nev_mat_data([file_path file_prefix5],'verbose','rothandle',0,1,'ignore_jumps');
  end
 
 %------------------------------------------------------------------------
 
-    
+cd('Z:\data\Jango_12a1\BDFStructs\PICexperiment\06-15-14\')
 save(strcat(file_prefix1,'-s'), 'bdf1')
 save(strcat(file_prefix2,'-s'), 'bdf2')
  save(strcat(file_prefix3,'-s'), 'bdf3')
-%save(strcat(file_prefix4,'-s'), 'bdf4')
-%save(strcat(file_prefix5,'-s'), 'bdf5')
+save(strcat(file_prefix4,'-s'), 'bdf4')
+

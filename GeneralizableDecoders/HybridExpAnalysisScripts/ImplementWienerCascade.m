@@ -4,8 +4,6 @@ ImplementWienerCascade
  %--------------------------------------------------------------------------------
  %Polynomial plotting
 %  PolyOrder = 2;PlotFlag=0;
-%  
-%  
 % Act = IsoTest.emgdatabin(numlags:end,emgInd);
 % [P] = WienerNonlinearity(HonIpred,Act,PolyOrder,PlotFlag);
 % HonIcascade = polyval(P,HonIpred);

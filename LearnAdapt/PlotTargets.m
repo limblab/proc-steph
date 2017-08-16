@@ -7,7 +7,8 @@
   trialtable = GetFixTrialTable(out_struct,'learnadapt',0);
   colors = distinguishable_colors(9);
   [~, TgtInd] = unique(trialtable(:,10));
-  figure; hold on; axis('square'); xlim([-14 14]); ylim([-14 14]);
+  %figure; 
+  hold on; axis('square'); xlim([-14 14]); ylim([-14 14]);
   MillerFigure;
   rectangle('Position',[-2,-2,4,4],'EdgeColor',[0.7 0.7 0.7])
   for i=1:length(TgtInd)

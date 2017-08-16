@@ -1,18 +1,18 @@
-function PlotAllIsometricPredictions(IsoBinned,IsoTest,IonIact,HonIpred,IonIpred,WonIpred,VAFstruct,save,foldername, filename)
+function PlotAllIsometricPredictions(IsoBinned,IsoTest,IonIact,HonIpred,IonIpred,WonIpred,VAFstruct,emgInd,save,foldername, filename)
 % Run this after you run the main generalizability code
 
-if nargin < 8
+if nargin < 9
     save=0;
 end
 
-for emgInd = 1:length(IsoBinned.emgdatabin(1,:))
+
 %Make figures
 % Make figure showing hybrid, across, within predictions
 linewidth = 1.5;
 x = (0:0.05:length(IonIact)*.05-0.05)';
 % Plot predictions of isometric data---------------------------------------
 %--------------------------------------------------------------------------
-figure;hold on;
+%figure;hold on;
 plot(x,IonIact(:,emgInd),'k','LineWidth', linewidth)
 plot(x,IonIpred(:,emgInd),'b','LineWidth', linewidth)
 plot(x,HonIpred(:,emgInd),'g','LineWidth', linewidth)
@@ -29,8 +29,6 @@ MillerFigure
 % Save figure
 if save == 1
     SaveFigure(foldername, strcat(filename,'_',char(IsoBinned.emgguide(emgInd))))
-end
- 
 end
 
 

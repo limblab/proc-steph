@@ -3,7 +3,7 @@ function Hybrid_Jango_EMGlist=Jango_HybridData_EMGQualityInfo()
 % JUST THE WRIST MUSCLES
 % evaluating muscle quality out of a full set of FCU FCR ECU ECR
 Hybrid_Jango_EMGlist{1,1} = '072314'; Hybrid_Jango_EMGlist{1,2}=['FCU';'FCR'; 'ECU'; 'ECR']; %FCR is questionable
-Hybrid_Jango_EMGlist{2,1} = '072414'; Hybrid_Jango_EMGlist{2,2}=['FCU';'FCR'; 'ECU'; 'ECR']; %FCR is questionable
+Hybrid_Jango_EMGlist{2,1} = '072414'; Hybrid_Jango_EMGlist{2,2}=['FCU';'ECU'; 'ECR']; %FCR is questionable
 Hybrid_Jango_EMGlist{3,1} = '072514'; Hybrid_Jango_EMGlist{3,2}=['FCU';'FCR'; 'ECU'; 'ECR']; %all signals look good
 Hybrid_Jango_EMGlist{4,1} = '081914'; Hybrid_Jango_EMGlist{4,2}=['FCU';'FCR'; 'ECU'; 'ECR']; %all signals look good
 Hybrid_Jango_EMGlist{5,1} = '082014'; Hybrid_Jango_EMGlist{5,2}=['FCU';'FCR'; 'ECU'; 'ECR']; %all signals look good

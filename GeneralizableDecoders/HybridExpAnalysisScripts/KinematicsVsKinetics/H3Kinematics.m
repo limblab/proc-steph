@@ -3,14 +3,16 @@
 clear
 % Step 1a: Initialize folders
 %  monkeyname = 'Kevin';
-%   BaseFolder = 'X:\limblab\User_folders\Stephanie\Data Analysis\Generalizability\Kevin\';
+%   BaseFolder = 'Z:\limblab\User_folders\Stephanie\Data Analysis\Generalizability\Kevin\';
 % SubFolder={'05-19-15s','05-21-15s','05-25-15s','05-26-15s','06-04-15s'};
 
+% 
  monkeyname = 'Jango';
   BaseFolder = 'Z:\limblab\User_folders\Stephanie\Data Analysis\Generalizability\Jango\';
  SubFolder = {'07-24-14s','07-25-14s','08-19-14s','08-20-14s',...
      '08-21-14s','09-23-14s','10-10-14s','10-11-14s'...
      '10-12-14s'};
+ SubFolder={'08-19-14s'};
 
 
 
@@ -54,7 +56,7 @@ end
 [Hybrid3 IsoTrain IsoTest WmTrain WmTest SprTrain SprTest] = AppendIsoWmSprThirds(IsoBinned,WmBinned,SprBinned);
 
 % Build model for kinmatics
-options=[]; options.PredCursPos = 1;
+options=[]; options.PredEMG=0; options.PredCursPos=1; options.PredVeloc = 0;
 %BuildNormalModels -------------------------------------------------------
 Hmodel = BuildModel(Hybrid3,options);
 SprModel = BuildModel(SprTrain, options);
@@ -117,6 +119,8 @@ IonW_kin_vaf_means(z) = mean(IonW_kin_vaf(:,1)); IonW_kin_vaf_STEs(z) = std(IonW
 IonS_kin_vaf_means(z) = mean(IonS_kin_vaf(:,1)); IonS_kin_vaf_STEs(z) = std(IonS_kin_vaf(:,1))/sqrt(length(IonS_kin_vaf(:,1)));
 
 
+% Sanity check plots
+%PlotEMGforKinematicsSanityCheck(IsoBinned,WmBinned,SprBinned)
 
 
 clearvars -except monkeyname BaseFolder SubFolder HonS_kin_vaf_means...
@@ -146,25 +150,26 @@ end
 [meanAllIonW_kin_vaf, steAllIonW_kin_vaf] = FindMeanAndSTE(AllIonW_kin_vaf(:,1));
 
 
+% Plot figure for summary across all days
 figure; hold on;
 h0 = errorbar(1,meanAllHonI_kin_vaf, steAllHonI_kin_vaf, steAllHonI_kin_vaf,'.c');
 h1 = errorbar(1,meanAllIonI_kin_vaf, steAllIonI_kin_vaf, steAllIonI_kin_vaf,'.b');
-h2 = errorbar(1,meanAllWonI_kin_vaf, steAllWonI_kin_vaf, steAllWonI_kin_vaf,'.r');
-h3 = errorbar(1,meanAllSonI_kin_vaf, steAllSonI_kin_vaf, steAllSonI_kin_vaf,'.m');
+h2 = errorbar(1,meanAllWonI_kin_vaf, steAllWonI_kin_vaf, steAllWonI_kin_vaf,'.g');
+h3 = errorbar(1,meanAllSonI_kin_vaf, steAllSonI_kin_vaf, steAllSonI_kin_vaf,'.','Color',[0.5 0 1]);
 
 h4 = errorbar(2,meanAllHonW_kin_vaf, steAllHonW_kin_vaf, steAllHonW_kin_vaf,'.c');
-h5 = errorbar(2,meanAllWonW_kin_vaf, steAllWonW_kin_vaf, steAllWonW_kin_vaf,'.b');
-h6 = errorbar(2,meanAllSonW_kin_vaf, steAllSonW_kin_vaf, steAllSonW_kin_vaf,'.m');
-h7 = errorbar(2,meanAllIonW_kin_vaf, steAllIonW_kin_vaf, steAllIonW_kin_vaf,'.k');
+h5 = errorbar(2,meanAllWonW_kin_vaf, steAllWonW_kin_vaf, steAllWonW_kin_vaf,'.g');
+h6 = errorbar(2,meanAllSonW_kin_vaf, steAllSonW_kin_vaf, steAllSonW_kin_vaf,'.','Color',[0.5 0 1]);
+h7 = errorbar(2,meanAllIonW_kin_vaf, steAllIonW_kin_vaf, steAllIonW_kin_vaf,'.b');
 
 h8 = errorbar(3,meanAllHonS_kin_vaf, steAllHonS_kin_vaf, steAllHonS_kin_vaf,'.c');
-h9 = errorbar(3,meanAllSonS_kin_vaf, steAllSonS_kin_vaf, steAllSonS_kin_vaf,'.b');
-h10 = errorbar(3,meanAllWonS_kin_vaf, steAllWonS_kin_vaf, steAllWonS_kin_vaf,'.r');
-h11 = errorbar(3,meanAllIonS_kin_vaf, steAllIonS_kin_vaf, steAllIonS_kin_vaf,'.k');
+h9 = errorbar(3,meanAllSonS_kin_vaf, steAllSonS_kin_vaf, steAllSonS_kin_vaf,'.','Color',[0.5 0 1]);
+h10 = errorbar(3,meanAllWonS_kin_vaf, steAllWonS_kin_vaf, steAllWonS_kin_vaf,'.g');
+h11 = errorbar(3,meanAllIonS_kin_vaf, steAllIonS_kin_vaf, steAllIonS_kin_vaf,'.b');
 
 
 set([h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 h11],'MarkerSize',20);
-set([h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 h11],'LineWidth',1)
+set([h0 h1 h2 h3 h4 h5 h6 h7 h8 h9 h10 h11],'LineWidth',1.5)
 xlim=([.5 3.5]);
 ylim([-2 1])
 ax=gca;

@@ -39,9 +39,10 @@ end
 if SpringFile==1
     %[~,~,~, SprTrain, SprTest] = makeHybridFileFixed(SprBinned,WmBinned);
     [~,~,~, SprTrain, SprTest] = makeHybridFileFixed(SprBinned,WmBinned);
-   % [Hybrid3] = HybridFile3Task(IsoBinned,WmBinned,SprBinned);
+    % [Hybrid3] = HybridFile3Task(IsoBinned,WmBinned,SprBinned);
     [Hybrid3] = AppendIsoWmSprThirds(IsoBinned,WmBinned,SprBinned);
 end
+
 
 % Step 3| Build Decoders
 % Build hybrid decoder ---------------------------------------------------
@@ -52,12 +53,13 @@ Fakehybrid.H = hybridH;
 Hmodel = Fakehybrid; % Now you have the decoder variable structure with the correct H weights in it
 % Build H3 decoder --------------------------------------------------------
 if SpringFile==1
-options=[]; options.PredEMGs = 1;
-[hybridH3] = quickHybridDecoder(Hybrid3); % This gets you the hybrid weights
-Fakehybrid3 = BuildModel(Hybrid3, options); % This gives you a structure for the hybrid decoder to later input into other functions
-Fakehybrid3.H = hybridH3;
-H3model = Fakehybrid3; % Now you have the decoder variable structure with the correct H weights in it
+    options=[]; options.PredEMGs = 1;
+    [hybridH3] = quickHybridDecoder(Hybrid3); % This gets you the hybrid weights
+    Fakehybrid3 = BuildModel(Hybrid3, options); % This gives you a structure for the hybrid decoder to later input into other functions
+    Fakehybrid3.H = hybridH3;
+    H3model = Fakehybrid3; % Now you have the decoder variable structure with the correct H weights in it
 end
+
 %BuildNormalModels -------------------------------------------------------
 IsoModel = BuildModel(IsoTrain, options);
 WmModel = BuildModel(WmTrain, options);

@@ -1,7 +1,7 @@
-function PlotAllMovementPredictions(WmBinned,WmTest,WonWact,HonWpred,WonWpred,IonWpred,VAFstruct,save,foldername, filename)
+function PlotAllMovementPredictions(WmBinned,WmTest,WonWact,HonWpred,WonWpred,IonWpred,VAFstruct,emgInd,save,foldername, filename)
 % Run this after you run the main generalizability code
 
-if nargin < 8
+if nargin < 9
     save=0;
 end
 
@@ -10,8 +10,7 @@ end
 %--------------------------------------------------------------------------
 linewidth = 1.5;
 x = (0:0.05:length(WonWact)*.05-0.05)';
-for emgInd = 1:length(WmBinned.emgdatabin(1,:))
-figure;hold on;
+hold on;
 plot(x,WonWact(:,emgInd),'k','LineWidth', linewidth)
 plot(x,WonWpred(:,emgInd),'b','LineWidth', linewidth)
 plot(x,HonWpred(:,emgInd),'g','LineWidth', linewidth)
@@ -29,7 +28,7 @@ if save == 1
     SaveFigure(foldername, strcat(filename,'_',char(WmBinned.emgguide(emgInd))))
 end
 
-end
+
  
  % Plot target number
 
