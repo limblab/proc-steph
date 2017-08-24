@@ -1,12 +1,11 @@
 % DynamicRanges_FR
 % Look at mean EMG during center and target hold
 
-monkeyname='Jango';
-%monkeyname = 'Kevin'
-
 tt=binnedData.trialtable;
 failedtrials=find(tt(:,9)~=82);
 tt(failedtrials,:)=[];
+neg1indices = find(tt(:,6)==-1);
+tt(neg1indices,:)=[];
 
 % Fix trial table numbers
 for i=1:length(tt)
@@ -56,18 +55,18 @@ end
 
 % Large extension
 Target1Ind=find(TargetNumber==1);
-Target1FRperneuron=neuronTargetTotalFR(Target1Ind,:)
-Target1MeanFRperneuronAcrossTrials=mean(Target1FRperneuron)
-[sortedT1 sortedIndsT1] = sort(Target1MeanFRperneuronAcrossTrials,'descend')
+Target1FRperneuron=neuronTargetTotalFR(Target1Ind,:);
+Target1MeanFRperneuronAcrossTrials=mean(Target1FRperneuron);
+[sortedT1 sortedIndsT1] = sort(Target1MeanFRperneuronAcrossTrials,'descend');
 %ExtensionMaxNeurons_Inds=[1:length(binnedData.spikeratedata(1,:))]; all
 %the neurons
 ExtensionMaxNeurons_Inds=sortedIndsT1(1:10);
 
 % Large flexion
 Target6Ind=find(TargetNumber==6);
-Target6FRperneuron=neuronTargetTotalFR(Target6Ind,:)
-Target6MeanFRperneuronAcrossTrials=mean(Target6FRperneuron)
-[sortedT6 sortedIndsT6] = sort(Target6MeanFRperneuronAcrossTrials,'descend')
+Target6FRperneuron=neuronTargetTotalFR(Target6Ind,:);
+Target6MeanFRperneuronAcrossTrials=mean(Target6FRperneuron);
+[sortedT6 sortedIndsT6] = sort(Target6MeanFRperneuronAcrossTrials,'descend');
 %FlexionMaxNeurons_Inds=[1:length(binnedData.spikeratedata(1,:))] all the neurons
 FlexionMaxNeurons_Inds=sortedIndsT6(1:10);
 
@@ -180,8 +179,8 @@ plot(3,Target3Means,'.m','MarkerSize',20)
 plot(3,Target3CortexMeans,'+m','MarkerSize',10,'LineWidth',1.5)
 plot(4, CenterMean(FlexorInd),'.k','MarkerSize',20)
 plot(4,CenterCortexMean_Ext,'+k','MarkerSize',10,'LineWidth',1.5)
-ylim([0 4])
-xlim([-.1 4.5])
+ylim([0 3])
+xlim([-.5 4.5])
 title('Extension')
 
 subplot(1,2,2); hold on
@@ -193,19 +192,55 @@ plot(3,Target6Means,'.b','MarkerSize',20)
 plot(3,Target6CortexMeans,'+b','MarkerSize',10,'LineWidth',1.5)
 plot(0, CenterMean(ECRind),'.k','MarkerSize',20)
 plot(0,CenterCortexMean_Flex,'+k','MarkerSize',10,'LineWidth',1.5)
-ylim([0 4])
+ylim([0 3])
 xlim([-.5 4.5])
 title('Flexion')
 
 
 %%
 % Percent change
-ExtRange1=((Target1CortexMeans-Target2CortexMeans)/Target2CortexMeans)*100
-ExtRange2=((Target2CortexMeans-Target3CortexMeans)/Target2CortexMeans)*100
+ExtRangeCortex0=((CenterCortexMean_Ext-Target2CortexMeans)/Target2CortexMeans);
+ExtRangeCortex1=((Target1CortexMeans-Target2CortexMeans)/Target2CortexMeans);
+ExtRangeCortex2=((Target3CortexMeans-Target2CortexMeans)/Target2CortexMeans);
+
+FlexRangeCortex0=((CenterCortexMean_Flex-Target5CortexMeans)/Target5CortexMeans);
+FlexRangeCortex1=((Target4CortexMeans-Target5CortexMeans)/Target5CortexMeans);
+FlexRangeCortex2=((Target6CortexMeans-Target5CortexMeans)/Target5CortexMeans);
+
+ExtRangeEMG0 = ((CenterMean(ECRind)-Target2Means)/Target2Means);
+ExtRangeEMG1=((Target1Means-Target2Means)/Target2Means);
+ExtRangeEMG2=((Target3Means-Target2Means)/Target2Means);
+
+FlexRangeEMG0=((CenterMean(FlexorInd)-Target5Means)/Target5Means);
+FlexRangeEMG1=((Target4Means-Target5Means)/Target5Means);
+FlexRangeEMG2=((Target6Means-Target5Means)/Target5Means);
+
+figure
+subplot(1,2,1); hold on
+plot(1,ExtRangeCortex1,'xm','LineWidth', 2,'MarkerSize',8)
+plot(2,ExtRangeCortex2,'xm','LineWidth', 2,'MarkerSize',8)
+plot(1,ExtRangeEMG1,'.m','MarkerSize',20)
+plot(2,ExtRangeEMG2,'.m','MarkerSize',20)
+MillerFigure
+xlim([0 3]); ylim([0 1])
+
+subplot(1,2,2); hold on
+plot(1,FlexRangeCortex1,'xb','LineWidth', 2,'MarkerSize',8)
+plot(2,FlexRangeCortex2,'xb','LineWidth', 2,'MarkerSize',8)
+plot(1,FlexRangeEMG1,'.b','MarkerSize',20)
+plot(2,FlexRangeEMG2,'.b','MarkerSize',20)
+MillerFigure
+xlim([0 3]); ylim([0 1])
+suptitle('Percent change')
 
 
-FlexRange1=(Target5CortexMeans-Target4CortexMeans)/Target5CortexMeans
-FlexRange2=(Target6CortexMeans-Target5CortexMeans)/Target5CortexMeans
+
+
+
+
+
+
+
 
 
 
